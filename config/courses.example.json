@@ -5,5 +5,7 @@
   "speed": 2.0,
   "jobs": 6,
   "notopen_action": "continue",
-  "retry_interval": 2.0
+  "retry_interval": 2.0,
+  "proxies": [],
+  "proxy_rotate_on_error": true
 }

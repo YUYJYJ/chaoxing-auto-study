@@ -41,6 +41,8 @@ def load_settings():
         "course_ids": [str(x).strip() for x in ids if str(x).strip()],
         "speed": float(cfg.get("speed", 2.0)),
         "jobs": int(cfg.get("jobs", 6)),
+        "proxies": [str(x).strip() for x in (cfg.get("proxies") or []) if str(x).strip()],
+        "proxy_rotate_on_error": bool(cfg.get("proxy_rotate_on_error", True)),
         "source": str(path),
     }
 

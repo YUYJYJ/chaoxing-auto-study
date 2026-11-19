@@ -15,7 +15,9 @@ import sys
 import time
 from pathlib import Path
 
-from common import ROOT, DATA_DIR, ensure_dirs, all_course_ids
+from common import ROOT, DATA_DIR, ensure_dirs, all_course_ids, load_settings
+import state as state_mod
+import proxy_support
 from api.base import Chaoxing, SessionManager
 from api.logger import logger
 
@@ -66,6 +68,11 @@ def main():
     ap.add_argument("--rounds", type=int, default=30)
     args = ap.parse_args()
     ensure_dirs()
+    cfg = load_settings()
+    if cfg.get("proxies"):
+        n = proxy_support.load_proxies(cfg["proxies"])
+        log(f"已加载代理池: {n} 个")
+    st = state_mod.load()
     last, stagnant = -1, 0
     for i in range(args.rounds):
         try:
@@ -73,7 +80,9 @@ def main():
         except Exception as e:
             log("读进度失败:", e); break
         if not p0:
-            log("登录失败，请先在浏览器登录学习通，然后运行 python scripts/setup_cookies.py 导出登录态"); break
+            log("登录失败，请先在浏览器登录学习通，然后运行 python scripts/setup_cookies.py 导出登录态")
+            state_mod.record_error(st, "login_failed", "cookie 无效或已过期")
+            break
         log(f"=== 轮 {i+1} | 进度 {p0[0]}/{p0[1]} ===")
         if p0[0] >= p0[1]:
             log("全部完成"); break
@@ -102,6 +111,7 @@ def main():
         if not p1:
             break
         log(f"  轮后进度 {p1[0]}/{p1[1]}")
+        state_mod.record_round(st, p1[0], p1[1], {k: f"{v[0]}/{v[1]}" for k, v in p1[2].items()})
         for k, v in p1[2].items():
             if v[0] < v[1]:
                 log(f"     未满 {k[:24]} {v[0]}/{v[1]}")
