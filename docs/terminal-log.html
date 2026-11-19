@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#010409;padding:26px 22px;font-family:"SF Mono",Consolas,"Cascadia Code","Microsoft YaHei",monospace}
+.term{background:#0d1116;border:1px solid #30363d;border-radius:10px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.bar{background:#161b22;border-bottom:1px solid #30363d;padding:9px 16px;display:flex;align-items:center;gap:8px}
+.dot{width:12px;height:12px;border-radius:50%}
+.t{color:#8b949e;font-size:12.5px;margin-left:10px;font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+.code{padding:16px 20px;font-size:12.5px;line-height:1.75}
+.ln{color:#c9d1d9;white-space:pre-wrap;word-break:break-word}
+.cmd{color:#7ee787;font-weight:600}
+.cmt{color:#6e7681;font-style:italic}
+.warn{color:#d29922}
+.ok{color:#3fb950}
+.dim{color:#8b949e}
+</style></head><body><div class="term">
+<div class="bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div>
+<div class="dot" style="background:#28c840"></div><div class="t">auto_run.py — 真实运行日志（节选）</div></div>
+<div class="code">
+<div class="ln cmd">$ python scripts/auto_run.py</div>
+<div class="ln "></div>
+<div class="ln cmt"># ---- 阶段1：章节链式解锁（大量章节显示未开放）----</div>
+<div class="ln warn">2026-11-19 17:09:17.455 +08:00 | WARN    | __main__:worker_thread:400 - 章节未开启: 自动控制系统设计 - 1.5 章节测验, 正在跳过</div>
+<div class="ln warn">2026-11-19 17:09:18.478 +08:00 | WARN    | __main__:worker_thread:400 - 章节未开启: 自动控制系统设计 - 2.1 数学模型与传递函数, 正在跳过</div>
+<div class="ln "></div>
+<div class="ln cmt"># ---- 阶段2：并发刷视频（6 路并行）----</div>
+<div class="ln ok">2026-11-19 17:09:18.240 +08:00 | INFO     | api.base:study_video:881 - 开始任务: 自动控制系统基本概念_第4讲分类与工业案例实战.mp4, 总时长: 1803s, 已进行: 1003s</div>
+<div class="ln ok">2026-11-19 17:09:24.876 +08:00 | INFO     | api.base:study_video:881 - 开始任务: 功率方向继电器的工作原理.mp4, 总时长: 2645s, 已进行: 1404s</div>
+<div class="ln ok">2026-11-19 17:09:27.575 +08:00 | INFO     | api.base:study_video:881 - 开始任务: 分拣站视频.mp4, 总时长: 1637s, 已进行: 1043s</div>
+<div class="ln "></div>
+<div class="ln cmt"># ---- 阶段3：填空题/简答题答案自动填充 ----</div>
+<div class="ln dim">2026-11-19 17:09:25.927 +08:00 | INFO     | api.base:study_work:1174 - 【简答题】什么是智能电网？ 填写答案为 智能电网是将先进的传感量测技术、信息通信技术、分析决策技术、自动控制技术和能源电力技术相结合，并与电网基础设施高度集成而形</div>
+<div class="ln dim">2026-11-19 17:09:25.928 +08:00 | INFO     | api.base:study_work:1174 - 【简答题】智能电网的基本特征有哪些？ 填写答案为</div>
+<div class="ln "></div>
+<div class="ln cmt"># ---- 阶段4：章节测验提交 &amp; 平台判分 ----</div>
+<div class="ln ok">2026-11-19 17:11:16.545 +08:00 | INFO     | api.base:study_work:1239 - 提交答题成功 -&gt; success!</div>
+<div class="ln dim">2026-11-19 17:11:17.092 +08:00 | DEBUG    | api.base:_check_work_result:1476 - 章节检测成绩: 0.0 分, 全部正确: False, 错题数: 0, 未解析题数: 15[0</div>
+<div class="ln ok">2026-11-19 17:13:07.263 +08:00 | INFO     | api.base:study_work:1239 - 提交答题成功 -&gt; success!</div>
+<div class="ln dim">2026-11-19 17:13:07.628 +08:00 | DEBUG    | api.base:_check_work_result:1476 - 章节检测成绩: 88.9 分, 全部正确: False, 错题数: 0, 未解析题数: 9[0</div>
+<div class="ln "></div>
+<div class="ln cmt"># ---- 阶段5：任务点完成 &amp; 循环推进 ----</div>
+<div class="ln ok">2026-11-19 17:09:12.857 +08:00 | DEBUG    | __main__:worker_thread:394 - Task success: HMI系统设计、安装与调试 - 1.1 课程介绍</div>
+<div class="ln ok">2026-11-19 17:09:12.860 +08:00 | DEBUG    | __main__:worker_thread:394 - Task success: 电路检测与维修 - 1.1 音乐盒原理图</div>
+<div class="ln "></div>
+<div class="ln cmt">22:06:45 | === 轮 1 | 进度 142/172 ===</div>
+<div class="ln cmt">22:26:02 |   轮后进度: 144/172</div>
+<div class="ln cmt">22:26:14 | === 轮 2 | 进度 144/172 ===</div>
+<div class="ln cmt">00:30:54 |   轮后进度: 145/172</div>
+</div></div></body></html>
