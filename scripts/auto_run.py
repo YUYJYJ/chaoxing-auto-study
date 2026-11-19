@@ -80,6 +80,13 @@ def main():
 
         out, rc = run("harvest_quizzes.py")
         log(f"  采集题目 rc={rc}")
+        # 若用户配置了 LLM，则自动生成答案（无需手工逐题填写）
+        llm_cfg = ROOT / "config" / "llm.json"
+        if llm_cfg.exists():
+            out, rc = run("generate_answers.py")
+            for l in [x for x in out.splitlines() if x.startswith("[") or "已生成" in x][-3:]:
+                log("  " + l.strip()[:110])
+            log(f"  LLM 生成答案 rc={rc}")
         out, rc = run("fill_quizzes.py")
         for l in [x for x in out.splitlines() if "提交:" in x or "缺:" in x][-5:]:
             log("  " + l.strip()[:120])

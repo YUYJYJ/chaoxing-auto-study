@@ -110,7 +110,25 @@ python scripts/harvest_quizzes.py       # 只采集章节测验题目
 python scripts/fill_quizzes.py          # 提交测验（需先写答案）
 ```
 
-### 5. 填写测验答案
+### 5. 测验答案：自动生成（推荐）或手工填写
+
+章节测验的答案**不在仓库里**。两种做法：
+
+**A. 用你自己的大模型 API 自动生成（推荐）**
+
+```bash
+cp config/llm.example.json config/llm.json
+# 编辑 config/llm.json，填入 endpoint / key / model
+python scripts/generate_answers.py
+```
+
+支持任何 OpenAI 兼容的 chat/completions 端点：DeepSeek、智谱、通义、Kimi、
+OpenAI，或本地 Ollama（`http://localhost:11434/v1/chat/completions`）。
+`config/llm.json` 含密钥，已被 `.gitignore` 排除，不会上传。
+
+配好 `llm.json` 后，`auto_run.py` 会自动调用它，全程无需手工答题。
+
+**B. 手工填写**
 
 采集后题目在 `data/pending_questions.json`。把答案写进 `data/answers.json`
 （可先 `cp config/answers.example.json data/answers.json` 再改）：
@@ -139,6 +157,7 @@ chaoxing-tool/
 │   ├── setup_cookies.py      # 导出浏览器 cookie
 │   ├── list_courses.py       # 列出课程与ID
 │   ├── harvest_quizzes.py    # 采集章节测验题目
+│   ├── generate_answers.py   # 用你自己的 LLM API 生成答案
 │   ├── fill_quizzes.py       # 答案格式转换 + 提交
 │   ├── study.py              # 刷视频/文档（包装 upstream/main.py）
 │   ├── auto_run.py           # 全自动循环入口
@@ -151,6 +170,7 @@ chaoxing-tool/
 │   └── resource/font_map_table.json
 ├── config/
 │   ├── answers.example.json  # 答案格式示例（非真实答案）
+│   ├── llm.example.json      # 大模型 API 配置模板
 │   ├── courses.example.json  # 课程配置模板
 │   └── config.ini.example    # 上游配置模板
 ├── data/                     # 运行时数据（被 .gitignore 忽略）

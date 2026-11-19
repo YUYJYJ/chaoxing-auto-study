@@ -15,6 +15,10 @@ DATA_DIR = ROOT / "data"
 
 # 让 upstream/ 下的 api 包可被 import
 sys.path.insert(0, str(UPSTREAM))
+# 上游用相对路径 resource/font_map_table.json 找字体表，需切到 upstream 目录
+# （只影响字体解码，不改变调用方的工作目录）
+import os
+os.chdir(str(UPSTREAM))
 
 DEFAULT_COURSES = CONFIG_DIR / "courses.example.json"
 USER_COURSES = CONFIG_DIR / "courses.json"

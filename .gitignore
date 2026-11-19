@@ -2,6 +2,7 @@
 cookies.txt
 config.ini
 config/courses.json
+config/llm.json
 data/
 
 # 运行产物
