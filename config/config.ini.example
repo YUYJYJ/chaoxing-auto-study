@@ -1,0 +1,39 @@
+; 复制为 config.ini 后按需修改。
+; 推荐：先用 cookie 登录（无需账号密码），运行 python scripts/export_cookies.py 生成 cookies.txt。
+[common]
+use_cookies = true
+username =
+password =
+course_list =
+speed = 2
+jobs = 6
+notopen_action = continue
+retry_interval = 2.0
+work_redo_enabled = false
+work_max_retries = 0
+add_learning_count = false
+target_count = 100
+
+[tiku]
+; 兜底题库。GO题无需 token；也可填 TikuYanxi,TikuLike,TikuAdapter,AI
+provider=TikuGo
+check_llm_connection=false
+submit=true
+cover_rate=0.9
+delay=1.0
+tokens=
+go_authorization=
+go_min_interval=1.0
+go_retry_times=3
+go_retry_backoff=1.2
+endpoint=
+key=
+model=
+min_interval_seconds=3
+true_list=正确,对,√,是
+false_list=错误,错,×,否,不对,不正确
+
+[notification]
+provider=ServerChan
+url=
+tg_chat_id=

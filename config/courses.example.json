@@ -1,0 +1,9 @@
+{
+  "_说明": "把下面 course_ids 改成你自己要刷的课程ID。留空数组 [] 表示学习通账号里的全部课程。",
+  "_如何获取课程ID": "运行 python scripts/list_courses.py，会列出你账号下所有课程及ID；或打开课程页面看地址栏 courseid= 后面的数字。",
+  "course_ids": [],
+  "speed": 2.0,
+  "jobs": 6,
+  "notopen_action": "continue",
+  "retry_interval": 2.0
+}

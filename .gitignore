@@ -1,0 +1,17 @@
+# 隐私与登录态：绝不提交
+cookies.txt
+config.ini
+config/courses.json
+data/
+
+# 运行产物
+*.log
+*.out
+__pycache__/
+*.pyc
+.DS_Store
+
+# 缓存
+cache.json
+answer_cache.json
+pending_questions.json
