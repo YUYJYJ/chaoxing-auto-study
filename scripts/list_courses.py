@@ -12,7 +12,7 @@ def main():
     ensure_dirs()
     cx = Chaoxing()
     if not cx.login(login_with_cookies=True).get("status"):
-        print("登录失败。请检查 cookies.txt 或改用账号密码（config.ini）。")
+        print("登录失败。请先在浏览器登录学习通，然后运行 python scripts/setup_cookies.py 导出登录态。")
         return
     print(f"当前账号: {cx.get_name()}\n")
     courses = cx.get_course_list()

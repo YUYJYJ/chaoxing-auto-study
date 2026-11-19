@@ -21,11 +21,25 @@ SUBMIT_URL = "https://mooc1.chaoxing.com/mooc-ans/work/addStudentWorkNew"
 
 
 def load_answers():
+    """加载答案：内置样例作为基础，用户自己的 answers.json 覆盖/补充。"""
+    merged = {}
+    sample = ROOT / "config" / "answers.example.json"
+    if sample.exists():
+        try:
+            _sd = json.loads(sample.read_text(encoding="utf-8"))
+            merged.update({k: v for k, v in _sd.items() if not k.startswith("_")})
+        except Exception:
+            pass
     path = DATA_DIR / "answers.json"
-    if not path.exists():
-        print(f"未找到 {path}，请先创建并填写答案。")
-        return {}
-    return json.loads(path.read_text(encoding="utf-8"))
+    if path.exists():
+        try:
+            _ud = json.loads(path.read_text(encoding="utf-8"))
+            merged.update({k: v for k, v in _ud.items() if not k.startswith("_")})
+        except Exception as e:
+            print(f"读取 {path} 失败: {e}")
+    if not merged:
+        print(f"提示：未找到答案。请用 data/answers.json 补充，或依赖 config/answers.example.json 内置题库。")
+    return merged
 
 
 def main():

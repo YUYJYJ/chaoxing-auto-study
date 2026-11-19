@@ -46,7 +46,9 @@ python -m pip install -r requirements.txt
 ```
 
 依赖来自上游项目：`requests`, `beautifulsoup4`, `lxml`, `loguru`, `tenacity`,
-`pyaes`, `fonttools`, `ddddocr`, `openai`, `httpx`, `urllib3`, `chardet` 等。
+`pyaes`, `fonttools`, `openai`, `httpx`, `urllib3`, `chardet` 等。
+验证码识别库 `ddddocr`（约 80MB）是**可选**的，只有遇到平台验证码时才需要：
+`pip install ddddocr`。
 
 ## 使用流程
 
@@ -110,7 +112,8 @@ python scripts/fill_quizzes.py          # 提交测验（需先写答案）
 
 ### 5. 填写测验答案
 
-采集后答案在 `data/pending_questions.json`。把答案写进 `data/answers.json`：
+采集后题目在 `data/pending_questions.json`。把答案写进 `data/answers.json`
+（可先 `cp config/answers.example.json data/answers.json` 再改）：
 
 ```json
 {
@@ -147,6 +150,7 @@ chaoxing-tool/
 │   ├── LICENSE
 │   └── resource/font_map_table.json
 ├── config/
+│   ├── answers.example.json  # 答案格式示例（非真实答案）
 │   ├── courses.example.json  # 课程配置模板
 │   └── config.ini.example    # 上游配置模板
 ├── data/                     # 运行时数据（被 .gitignore 忽略）
@@ -160,6 +164,8 @@ chaoxing-tool/
 - 倍速和并发过高容易触发平台风控（403/验证码）。遇到 403 请降低 `speed`/`jobs`。
 - 简答题、附件上传类任务无法靠脚本拿到分数，需要人工到网页端处理。
 - `cookies.txt` 等同于你的登录凭证，**不要提交到任何代码仓库**，也别发给别人。
+- 仓库**不附带任何课程的真实答案**。`config/answers.example.json` 只是格式示例，
+  章节测验的答案需要你自己填写——这既是平台要求，也是学习本身的一部分。
 - 本项目基于 GPL-3.0 的上游代码修改，因此同样以 GPL-3.0 发布。
 
 ## 致谢

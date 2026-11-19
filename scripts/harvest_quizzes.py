@@ -67,7 +67,7 @@ def main():
     ensure_dirs()
     cx = Chaoxing()
     if not cx.login(login_with_cookies=True).get("status"):
-        print("登录失败，请检查 cookies.txt。")
+        print("登录失败，请先在浏览器登录学习通，然后运行 python scripts/setup_cookies.py 导出登录态。")
         return
     want = all_course_ids()
     session = SessionManager.get_session()

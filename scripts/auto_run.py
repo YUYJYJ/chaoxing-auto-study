@@ -73,7 +73,7 @@ def main():
         except Exception as e:
             log("读进度失败:", e); break
         if not p0:
-            log("登录失败，请检查 cookies.txt"); break
+            log("登录失败，请先在浏览器登录学习通，然后运行 python scripts/setup_cookies.py 导出登录态"); break
         log(f"=== 轮 {i+1} | 进度 {p0[0]}/{p0[1]} ===")
         if p0[0] >= p0[1]:
             log("全部完成"); break
